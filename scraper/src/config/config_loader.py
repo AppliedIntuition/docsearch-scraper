@@ -50,6 +50,7 @@ class ConfigLoader:
     user_agent = 'Algolia DocSearch Crawler'
     only_content_level = False
     query_rules = []
+    strip_domains = False
 
     # data storage, starting here attribute are not config params
     config_file = None

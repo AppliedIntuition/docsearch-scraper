@@ -188,6 +188,10 @@ class DefaultStrategy(AbstractStrategy):
                     record['url_without_variables'] = url_without_variables
                     record[attr] = value
 
+                if self.config.strip_domains:
+                    record['url'] = self._get_url_without_domain(record['url'])
+                    record['url_without_variables'] = self._get_url_without_domain(record['url_without_variables'])
+
                 record['url_without_anchor'] = record['url'].split('?id=')[0]
                 record['url'] = self._get_url_with_anchor(record['url_without_anchor'],
                                                           record['anchor'])
@@ -350,3 +354,6 @@ class DefaultStrategy(AbstractStrategy):
             return current_page_url + '?id=' + anchor
 
         return current_page_url
+
+    def _get_url_without_domain(self, url):
+        return '/' + url.split('/', 3)[-1]
